@@ -20,31 +20,10 @@ vim.keymap.set("v", "<S-Up>", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<Leader>e", "<cmd>Oil<cr>")
 
-local harpoon = require("harpoon")
-harpoon:setup()
-vim.keymap.set("n", "<leader>a", function()
-  harpoon:list():add()
-end)
-vim.keymap.set("n", "<C-e>", function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
-vim.keymap.set("n", "<C-1>", function()
-  harpoon:list():select(1)
-end)
-vim.keymap.set("n", "<C-2>", function()
-  harpoon:list():select(2)
-end)
-vim.keymap.set("n", "<C-3>", function()
-  harpoon:list():select(3)
-end)
-vim.keymap.set("n", "<C-4>", function()
-  harpoon:list():select(4)
-end)
-
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-q>", function()
-  harpoon:list():prev()
-end)
-vim.keymap.set("n", "<C-a>", function()
-  harpoon:list():next()
-end)
+-- ターミナル(insert)モードから直接ウィンドウ移動する
+-- ノーマルモードの hy/hn/he/ho (C-w h/j/k/l) と同じ配置を Alt 付きで割り当てる。
+-- Claude Code の TUI は M-b/M-f しか使わないため衝突しない。
+vim.keymap.set("t", "<M-y>", [[<C-\><C-n><C-w>h]], { desc = "Move to left window" })
+vim.keymap.set("t", "<M-n>", [[<C-\><C-n><C-w>j]], { desc = "Move to lower window" })
+vim.keymap.set("t", "<M-e>", [[<C-\><C-n><C-w>k]], { desc = "Move to upper window" })
+vim.keymap.set("t", "<M-o>", [[<C-\><C-n><C-w>l]], { desc = "Move to right window" })
